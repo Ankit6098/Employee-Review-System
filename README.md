@@ -7,7 +7,7 @@ The Employee Review System is a web-based application developed using Node.js, E
 
 ## Demo
 
-https://placementadda.ankithub.me/
+https://employee-review-system-21ny.onrender.com
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
