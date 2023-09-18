@@ -1,0 +1,62 @@
+<%# # eployee view its like shows information of employee and list of feedbacks which need to be submitted %>
+
+    <main class="d-flex" style="width: 100vw; height: 80vh; flex-direction: column;">
+
+        <div class="border rounded">
+
+            <div id="warning-by-server"></div>
+
+            <% if (locals.user) { %>
+
+            <%# user information %>
+
+            <div id="user-info" class="p-3 border">
+
+            
+                <div id="user-name">Name: <%= user.name %></div>
+                <div id="user-email">Email <%= user.email %></div>
+                <div id="user-type">Type: <%= user.type %></div>
+                <div id="company-name">Company: <%= user.company.name %></div>
+                <% if (user.type == 'admin') { %>
+                    <div id="user-admin-ran">AdminRank: <%= user.adminRank %></div>
+                <% } %>
+                <div id="user-ranking"> Ranking: <%= user.rating %> (<%= user.feedbackRecieved.length %>) </div>
+            
+
+            </div>
+
+            <%# all pending feedbacks forms %>
+
+            <div id="pending-feedback" class="p-3">
+                <h3>Pending Feedbacks</h3>
+                <div>
+                    <% for( let index = 0; index < user.feedbackPending.length; index++ ) { %>
+                        <div class="mt-3">
+                            <form class="feedback-form">
+                                <div class="form-group">
+                                  <label for="feedback">Feedback for <%= user.feedbackPending[index].name %>:</label>
+                                  <textarea class="form-control" name="log" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label for="rating">Rating:</label>
+                                  <select class="form-control" name="rating" required>
+                                    <option value="1">1 star</option>
+                                    <option value="2">2 stars</option>
+                                    <option value="3">3 stars</option>
+                                    <option value="4">4 stars</option>
+                                    <option value="5">5 stars</option>
+                                  </select>
+                                </div>
+                                <input type="hidden" name="recieverId" value="<%= user.feedbackPending[index]._id %>" required>
+                                <button type="submit" class="btn btn-success mt-2">Submit</button>
+                            </form>     
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+            <script src="/js/employee_view.js"></script>
+        <% } %>
+
+    </div>
+
+</main>
